@@ -3,10 +3,10 @@
     This file is part of metal_pi.
     metal_pi is subject to the license specified in LICENSE.txt
 */
-#include "mail.hpp"
+#include "rpi/gpu/mail.hpp"
 
-#include "../mem/cache.hpp"
-#include "../io/memory_locations.hpp"
+#include "rpi/mem/cache.hpp"
+#include "rpi/io/memory_locations.hpp"
 
 namespace rpi {
 	namespace gpu {

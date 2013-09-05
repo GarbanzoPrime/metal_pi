@@ -9,7 +9,7 @@
 #include "rpi/config.hpp"
 
 #include "properties.hpp"
-#include "kul/units.hpp"
+#include "units/frequency.hpp"
 
 
 namespace rpi {
@@ -37,11 +37,11 @@ namespace rpi {
 
 			struct Response {
 				ClockId clock_id ;
-				Frequency< uint32_t , ratio<1> > rate ;
+				units::Hertz< uint32_t , units::ratio<1> > rate ;
 			} ;
 		} ;
-		
-		Frequency< uint32_t , ratio<1> > getClockRate( ClockId clock );
+
+		units::Hertz< uint32_t , units::ratio<1> > getClockRate( ClockId clock );
  	}
 }
 

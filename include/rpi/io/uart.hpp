@@ -8,14 +8,13 @@
 
 #include "rpi/config.hpp"
 
-#include "kul/units.hpp"
-#include "gpio.hpp"
+#include "rpi/io/gpio.hpp"
 
 namespace rpi {
 	namespace uart0 {
-		void enable( Baud baud_rate ) ;
+		void enable( unsigned int  baud_rate ) ;
 
-		struct LineControl { 
+		struct LineControl {
 			enum Val : uint32_t {
 				BRK  = 1 ,
 				PEN  = 1 << 1 ,
@@ -31,8 +30,8 @@ namespace rpi {
 
 				BITS_8 = 3 << 5 ,
 
-				SPS = 1 << 7 
-			} ; 
+				SPS = 1 << 7
+			} ;
 		} ;
 
 		struct Control {
@@ -50,7 +49,7 @@ namespace rpi {
 				RTSEN = 1 << 14 ,
 				CTSEN = 1 << 15 ,
 
-				DISABLE = 0  
+				DISABLE = 0
 			} ;
 		};
 
@@ -84,12 +83,9 @@ namespace rpi {
 
 		bool testFlag( Flag::Val flags );
 
-
-
-		
 		uint8_t read() ;
 		void read( uint8_t* target , size_t bytes ) ;
-		template<typename T>		
+		template<typename T>
 		void read( T & into ) {
 			read( reinterpret_cast<uint8_t*>( &into ) , sizeof( T ) ) ;		
 		}

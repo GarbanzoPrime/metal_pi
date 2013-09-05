@@ -3,29 +3,28 @@
     This file is part of metal_pi.
     metal_pi is subject to the license specified in LICENSE.txt
 */
-#include "uart.hpp"
-#include "../gpu/clock.hpp" 
-#include "../cpu/timing.hpp" 
-
+#include "rpi/io/uart.hpp"
+#include "rpi/gpu/clock.hpp"
+#include "rpi/cpu/timing.hpp"
 
 namespace rpi {
 	namespace uart0 {
-		void enable( uint32_t baud_rate ) {
+		void enable( unsigned int baud_rate ) {
 			io::UART0_CR.set( Control::DISABLE ) ;
-		
-			io::setPUDLow( io::GPPIOPUD::OFF , 
+
+			io::setPUDLow( io::GPPIOPUD::OFF ,
 							 io::GPPIO_14 | io::GPPIO_15 ) ;
 
 			// Clear pending interrupts.
 			io::UART0_ICR.set( 0x7FF ) ;
 
 			//we are going to assume no one is going to be messing with that clock rate from now on
-			Frequency<uint32_t , ratio<1> > uart_clock_rate = gpu::getClockRate( gpu::ClockId::UART ) ;
+			units::Hertz<uint32_t , units::ratio<1> > uart_clock_rate = gpu::getClockRate( gpu::ClockId::UART ) ;
 			auto baud_rate_16 = baud_rate * 16 ;
 
 			io::UART0_IBRD.set( uart_clock_rate.count() / baud_rate_16 ) ;
 			io::UART0_FBRD.set( ( ( ( uart_clock_rate.count() % baud_rate_16 ) * 4 ) + (baud_rate / 2 ) ) / baud_rate ) ;
-		
+
 			io::UART0_LCRH.set( LineControl::FEN | LineControl::BITS_8 ) ;
 
 			//TODO: add api control over interrupts
@@ -37,7 +36,7 @@ namespace rpi {
 
 		void write( uint8_t byte ) {
 			while( testFlag( Flag::TXFF ) ) { }
-		
+
 			io::UART0_DR.set( byte ) ;
 		}
 
@@ -49,7 +48,7 @@ namespace rpi {
 
 		void read( uint8_t* target , size_t bytes ) {
 			for( size_t i = 0 ; i < bytes ; ++i ) {
-				target[i] = read() ;			
+				target[i] = read() ;
 			}
 		}
 

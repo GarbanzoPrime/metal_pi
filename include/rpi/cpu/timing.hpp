@@ -10,7 +10,7 @@
 
 namespace rpi {
 	namespace cpu {
-		
+
 		//this will delay the cpu for at least <cycles> cycles
 		//depending on compiler inlining and various other factors,
 		//it may end up delaying further
@@ -27,4 +27,4 @@ namespace rpi {
 	}
 }
 
-#define
+#endif
