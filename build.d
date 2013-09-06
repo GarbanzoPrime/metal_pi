@@ -17,7 +17,8 @@ private {
 		metal_pi_dir ~ "src/rpi/gpu/mail.cpp" ,
 		metal_pi_dir ~ "src/rpi/gpu/clock.cpp" ,
 		metal_pi_dir ~ "src/rpi/io/uart.cpp" ,
-		metal_pi_dir ~ "src/rpi/io/gpio.cpp"
+		metal_pi_dir ~ "src/rpi/io/gpio.cpp" ,
+		metal_pi_dir ~ "src/rpi/gpu/vchiq.cpp" 
 	] ;
 
 	immutable string[] compileFlags = [

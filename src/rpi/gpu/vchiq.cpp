@@ -3,7 +3,7 @@
     This file is part of metal_pi.
     metal_pi is subject to the license specified in LICENSE.txt
 */
-#include "./vchiq.hpp"
+#include "rpi/gpu/vchiq.hpp"
 namespace rpi {
 	namespace gpu {
 		namespace vchiq {
@@ -11,7 +11,7 @@ namespace rpi {
 				shared_data 	= target ;
 				cpu_comm_state 	= &target->head.slave_state ;
 				gpu_comm_state 	= &target->head.master_state ;
-			
+
 				last_available_page = 0 ;
 
 				for( auto & page : cpu_comm_state->page_table ) {

@@ -10,6 +10,7 @@
 
 namespace rpi {
 	namespace mem {
+		constexpr kul::size_t CACHE_LINE_LENGTH = 128 ;
 		static inline void memoryBarrier()
 		{
 			int tmp ;

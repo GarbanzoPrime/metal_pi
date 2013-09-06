@@ -10,7 +10,6 @@
 #include "rpi/mem/cache.hpp"
 
 #include "kul/array.hpp"
-#include "kul/inplacepool.hpp"
 
 namespace rpi {
 	namespace gpu {
@@ -40,7 +39,7 @@ namespace rpi {
 			struct Event {
 				int armed				= 0 ;
 				int fired				= 0 ;
-				
+
 				//I strongly suspect this has nothing to do with the vchiq itself,
 				//but is meant for user-side synchronization, which we don't care about here...					
 				//I say this because in the linux driver, this is initialised to a raw user-side pointer
@@ -60,7 +59,7 @@ namespace rpi {
 				int            	slot_queue_recycle       = 0 ;
 				Event			sync_trigger  ;
 				Event 			sync_release ;
-				
+
 				array< int, MAX_PAGES_PER_SIDE > 	page_table = { -1 } ;
 				array< int, DEBUG_MAX >      			debug      = { 0 } ;
 			} ;
@@ -70,7 +69,7 @@ namespace rpi {
 				short release_count = 0 ;
 			} ;
 
-			struct alignas(4096) Header { 
+			struct alignas(4096) Header {
 				int                  magic 						= makeFourCC( 'V' , 'C' , 'H' , 'I' ) ;
 				short                version					= 6 ;
 				short                version_min				= 3 ;
@@ -80,12 +79,12 @@ namespace rpi {
 				int                  max_page_per_side			= MAX_PAGES_PER_SIDE ;
 				int					 fragment_offset 			= 0 ;
 				int					 fragment_count 			= MAX_FRAGMENTS ;
-				
+
 				CommState            master_state ;
 				CommState            slave_state ;
 
 				array< SlotState , MAX_PAGES > page_states ;
-			} ; 
+			} ;
 
 
 			struct alignas(4096) Page {
@@ -101,14 +100,14 @@ namespace rpi {
 				Header 								head ;
 				array<Page, CPU_PAGES + GPU_PAGES > pages ;
 				array<Fragment, MAX_FRAGMENTS >     fragments ;
-			
+
 				void init() {
 					constexpr int pages_used_by_header = ( sizeof( Header ) + PAGE_SIZE - 1 ) / PAGE_SIZE ;
 					int first_master_slot = pages_used_by_header ;
 					head.master_state.sync_page  = first_master_slot ;
 					head.master_state.first_async_page = first_master_slot + 1;
 					head.master_state.last_async_page  = first_master_slot + GPU_PAGES - 1 ;
-					
+
 					int first_slave_slot = first_master_slot + GPU_PAGES ;
 
 					head.slave_state.sync_page   = first_master_slot ;

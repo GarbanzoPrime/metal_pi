@@ -15,21 +15,21 @@ namespace rpi {
 
 			class Service ;
 			enum class MessageType : int {
-				VCHIQ_MSG_PADDING           =  0, 
-				VCHIQ_MSG_CONNECT           =  1, 
-				VCHIQ_MSG_OPEN              =  2, 
-				VCHIQ_MSG_OPENACK           =  3, 
-				VCHIQ_MSG_CLOSE             =  4, 
-				VCHIQ_MSG_DATA              =  5, 
-				VCHIQ_MSG_BULK_RX           =  6, 
-				VCHIQ_MSG_BULK_TX           =  7, 
-				VCHIQ_MSG_BULK_RX_DONE      =  8, 
-				VCHIQ_MSG_BULK_TX_DONE      =  9, 
-				VCHIQ_MSG_PAUSE             = 10, 
-				VCHIQ_MSG_RESUME            = 11, 
-				VCHIQ_MSG_REMOTE_USE        = 12, 
-				VCHIQ_MSG_REMOTE_RELEASE    = 13, 
-				VCHIQ_MSG_REMOTE_USE_ACTIVE = 14, 
+				VCHIQ_MSG_PADDING           =  0,
+				VCHIQ_MSG_CONNECT           =  1,
+				VCHIQ_MSG_OPEN              =  2,
+				VCHIQ_MSG_OPENACK           =  3,
+				VCHIQ_MSG_CLOSE             =  4,
+				VCHIQ_MSG_DATA              =  5,
+				VCHIQ_MSG_BULK_RX           =  6,
+				VCHIQ_MSG_BULK_TX           =  7,
+				VCHIQ_MSG_BULK_RX_DONE      =  8,
+				VCHIQ_MSG_BULK_TX_DONE      =  9,
+				VCHIQ_MSG_PAUSE             = 10,
+				VCHIQ_MSG_RESUME            = 11,
+				VCHIQ_MSG_REMOTE_USE        = 12,
+				VCHIQ_MSG_REMOTE_RELEASE    = 13,
+				VCHIQ_MSG_REMOTE_USE_ACTIVE = 14,
 			} ;
 
 			template< typename PAYLOAD_T >
@@ -44,7 +44,7 @@ namespace rpi {
 			class Connection {
 			public:
 
-				void init( Data * target ) ; 
+				void init( Data * target ) ;
 				void enableService( Service & service ) ;
 
 				void sendMessage( Service * culprit ) ;
@@ -58,10 +58,10 @@ namespace rpi {
 
 			class Service {
 			public:
-				
+
 			private:
 				int _service_id ;
-				Connection * _connection
+				Connection * _connection ;
 			} ;
 		}
 	}
