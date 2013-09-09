@@ -9,16 +9,17 @@ import tasel.tasel ;
 import tasel.ext.llvm ;
 import std.algorithm ;
 import std.array ;
+import std.path ;
 
 import build_config ;
 
 private {
 	immutable string[] abi_src = [
-		metal_pi_dir ~ "src/rpi/gpu/mail.cpp" ,
-		metal_pi_dir ~ "src/rpi/gpu/clock.cpp" ,
-		metal_pi_dir ~ "src/rpi/io/uart.cpp" ,
-		metal_pi_dir ~ "src/rpi/io/gpio.cpp" ,
-		metal_pi_dir ~ "src/rpi/gpu/vchiq.cpp" 
+		metal_pi_dir.buildPath( "src/rpi/gpu/mail.cpp" ),
+		metal_pi_dir.buildPath( "src/rpi/gpu/clock.cpp" ) ,
+		metal_pi_dir.buildPath( "src/rpi/io/uart.cpp" ) ,
+		metal_pi_dir.buildPath( "src/rpi/io/gpio.cpp" ) ,
+		metal_pi_dir.buildPath( "src/rpi/gpu/vchiq.cpp" ) 
 	] ;
 
 	immutable string[] compileFlags = [
@@ -26,9 +27,9 @@ private {
 		"-nostdinc",
 		"-nostdinc++",
 		"-std=c++11" ,
-		"-I" ~ metal_pi_dir ~ "include" ,
-		"-I" ~ kul_dir ~ "include" ,
-		"-I" ~ units_dir ~ "include" ,
+		"-I" ~ metal_pi_dir.buildPath( "include" ),
+		"-I" ~ kul_dir.buildPath( "include" ),
+		"-I" ~ units_dir.buildPath( "include" ) ,
 	] ;
 }
 
