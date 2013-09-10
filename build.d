@@ -34,5 +34,5 @@ private {
 }
 
 Resource buildPiLib(BuildSet tasks) {
-	return tasks.addLLVMLib( abi_src , bin_dir ~ "libs/metalpi.bc" , intermediate_dir , compileFlags ) ;	
+	return tasks.addLLVMLib( abi_src , bin_dir.buildPath( "libs/metal_pi.bc" ) , intermediate_dir , compileFlags ) ;	
 }
